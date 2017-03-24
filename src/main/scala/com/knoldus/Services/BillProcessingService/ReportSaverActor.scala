@@ -14,18 +14,20 @@ class ReportSaverActor extends Actor with ActorLogging{
   var reportCounter = 0
 
   override def receive: Receive = {
-    case reports: List[Report] =>
+    case reportsList: List[List[Report]] =>
 
-      val pw = new PrintWriter(new File("/home/knoldus/hello.txt" ))
+      val pw = new PrintWriter(new File("hello.txt" ))
 
-      reports.foreach(report => {
-
-        pw.append(report.accountHolder + " | " +
-          report.accountNumber + " | " +
-          report.billerName + " | " +
-          report.category + " | " +
-          report.totalPaidAMount + " | \n"
-        )
+      reportsList.foreach(reportsOfOneUser => {
+        pw.append(s"Bills of ${reportsOfOneUser(0).accountHolder}\n")
+        reportsOfOneUser.foreach(report => {
+          pw.append(report.accountHolder + " | " +
+            report.accountNumber + " | " +
+            report.billerName + " | " +
+            report.category + " | " +
+            report.totalPaidAMount + " | \n"
+          )
+        })
 
       })
 

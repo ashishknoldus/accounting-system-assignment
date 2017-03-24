@@ -11,9 +11,9 @@ class BillGeneratorActor(dBInMemory: ActorRef) extends Actor with ActorLogging{
 
   override def receive = {
 
-    case biller: Biller =>
-      log.info("A biller is received in BillGeneratorActor")
-      dBInMemory.forward(biller)
+    case billers: List[Biller] =>
+      log.info("One user's billers are received in BillGeneratorActor")
+      dBInMemory.forward(billers)
 
     case _ =>
       sender ! new IllegalArgumentException("Wrong amount format. Expected (String, UserAmountPair)")

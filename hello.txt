@@ -1,0 +1,30 @@
+Bills of Vishesh Kumar
+Vishesh Kumar | 8812344 | Malwa | CarBill | 28166.0 | 
+Vishesh Kumar | 8812344 | NTPG | ElectricityBill | 28166.0 | 
+Vishesh Kumar | 8812344 | Sukhdev Dhaba | FoodBill | 28166.0 | 
+Vishesh Kumar | 8812344 | BSNL | InternetBill | 28166.0 | 
+Vishesh Kumar | 8812344 | JIO | PhoneBill | 28166.0 | 
+Bills of Ashish Tomer
+Ashish Tomer | 7931253 | Malwa | CarBill | 24951.0 | 
+Ashish Tomer | 7931253 | NTPG | ElectricityBill | 24951.0 | 
+Ashish Tomer | 7931253 | Sukhdev Dhaba | FoodBill | 24951.0 | 
+Ashish Tomer | 7931253 | BSNL | InternetBill | 24951.0 | 
+Ashish Tomer | 7931253 | JIO | PhoneBill | 24951.0 | 
+Bills of Rahul Yadav
+Rahul Yadav | 6172674 | Malwa | CarBill | 14783.0 | 
+Rahul Yadav | 6172674 | NTPG | ElectricityBill | 14783.0 | 
+Rahul Yadav | 6172674 | Sukhdev Dhaba | FoodBill | 14783.0 | 
+Rahul Yadav | 6172674 | BSNL | InternetBill | 14783.0 | 
+Rahul Yadav | 6172674 | JIO | PhoneBill | 14783.0 | 
+Bills of Neha Bhardwaj
+Neha Bhardwaj | 8100272 | Malwa | CarBill | 16554.0 | 
+Neha Bhardwaj | 8100272 | NTPG | ElectricityBill | 16554.0 | 
+Neha Bhardwaj | 8100272 | Sukhdev Dhaba | FoodBill | 16554.0 | 
+Neha Bhardwaj | 8100272 | BSNL | InternetBill | 16554.0 | 
+Neha Bhardwaj | 8100272 | JIO | PhoneBill | 16554.0 | 
+Bills of Pushpendra
+Pushpendra | 6243975 | Malwa | CarBill | 19400.0 | 
+Pushpendra | 6243975 | NTPG | ElectricityBill | 19400.0 | 
+Pushpendra | 6243975 | Sukhdev Dhaba | FoodBill | 19400.0 | 
+Pushpendra | 6243975 | BSNL | InternetBill | 19400.0 | 
+Pushpendra | 6243975 | JIO | PhoneBill | 19400.0 | 

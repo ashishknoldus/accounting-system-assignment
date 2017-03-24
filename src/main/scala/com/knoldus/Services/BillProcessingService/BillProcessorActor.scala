@@ -13,8 +13,8 @@ class BillProcessorActor(billGeneratorActor: ActorRef) extends Actor{
     case accountNumber: Long =>
       val dummyBills: List[Biller] = getDummyBIllers(accountNumber)
 
-      for ( dummyBill <- dummyBills)
-        billGeneratorActor.forward(dummyBill)
+      billGeneratorActor.forward(dummyBills)
+
 
     case _ => sender ! new IllegalArgumentException("Provide a valid Long account number")
   }

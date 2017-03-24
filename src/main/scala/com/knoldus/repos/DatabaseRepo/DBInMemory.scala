@@ -2,6 +2,7 @@ package com.knoldus.repos.DatabaseRepo
 
 import akka.actor.{Actor, ActorLogging, Props}
 import com.knoldus.Application
+import com.knoldus.Application.billProcessorActor
 import com.knoldus.repos.caseclasses._
 import com.knoldus.Services.BillProcessingService.BillProcessorActor
 
@@ -59,16 +60,13 @@ class DBInMemory extends Actor with ActorLogging{
 
       sender ! debitAmountResult
 
-    case biller: Biller =>
-      val saveBillerResult = saveBiller(biller)
-      log.info(saveBillerResult)
-
-      sender ! saveBillerResult
+    case billers: List[Biller] =>
+      billers.map(biller => saveBiller(biller))
+      sender ! "Bills saved"
 
     case "generate report" =>
       val reports = getReport()
       log.info(s"${reports.size} reports have been generated.")
-
       sender ! reports
 
     case _ => sender ! new IllegalArgumentException("Valid options are : UserAccount | Credit Amount | Debit Amount | Biller")
@@ -92,7 +90,7 @@ class DBInMemory extends Actor with ActorLogging{
       s"The username ${userAccount.userName} is already taken. Available in ${this.accNumToUserName.keys} Please choose another one"
     } else {
 
-      val billProcessor = Application.billProcessorActor
+      val billProcessor = billProcessorActor
 
       billProcessor ! userAccount.accountNumber
 
@@ -179,19 +177,23 @@ class DBInMemory extends Actor with ActorLogging{
   }
 
 
-  private def getReport(): List[Report] = {
+  private def getReport(): List[List[Report]] = {
 
     accNumToUserName.values.toList.map( accountNumber => {
 
-          Report(
-            this.userAccounts(accountNumber).accHolderName,
-            accountNumber,
-            this.userBills(accountNumber).head.billerName,
-            this.userBills(accountNumber).head.category,
-            this.userBillIterations(accountNumber).paidAmount
-          )
-    })
+      val billers = userBills(accountNumber)
 
+      billers.map(biller => {
+        Report(
+          this.userAccounts(accountNumber).accHolderName,
+          accountNumber,
+          biller.billerName,
+          biller.category,
+          this.userBillIterations(accountNumber).paidAmount
+        )
+      })
+
+    })
   }
 
 }
