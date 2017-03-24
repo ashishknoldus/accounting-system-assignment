@@ -25,6 +25,9 @@ class DBInMemory extends Actor with ActorLogging{
                                     paidAmount:          Float
                                   )
 
+
+
+
   private val userAccounts: mutable.Map[Long, UserAccount] = mutable.Map[Long, UserAccount]()
   //accNumToUserName is created to keep track of unique userName's - we won't have to drill down userAccounts
   private val accNumToUserName: mutable.Map[String, Long] = mutable.Map[String, Long]()
@@ -41,36 +44,32 @@ class DBInMemory extends Actor with ActorLogging{
       this.userBillIterations(userAccount.accountNumber) = BillIteration(20, 0, 0) //Total Iterations are fixed = 20
 
       val saveUserAccountResult = saveUserAccount(userAccount)
-
+      log.info(saveUserAccountResult)
       sender ! saveUserAccountResult
 
     case ("credit", amountToCredit: UserAmountPair) =>
       val creditAmountResult = creditAmount(amountToCredit)
-
+      log.info(creditAmountResult)
 
       sender ! creditAmountResult
 
     case ("debit", amountToDebit: UserAmountPair) =>
       val debitAmountResult = debitAmount(amountToDebit)
-
+      log.info(debitAmountResult)
 
       sender ! debitAmountResult
 
     case biller: Biller =>
       val saveBillerResult = saveBiller(biller)
-
+      log.info(saveBillerResult)
 
       sender ! saveBillerResult
 
     case "generate report" =>
       val reports = getReport()
-
+      log.info(s"${reports.size} reports have been generated.")
 
       sender ! reports
-
-    case userName: String =>
-
-      sender ! this.accNumToUserName(userName) //Send account number for a userName
 
     case _ => sender ! new IllegalArgumentException("Valid options are : UserAccount | Credit Amount | Debit Amount | Biller")
 
@@ -96,6 +95,8 @@ class DBInMemory extends Actor with ActorLogging{
       val billProcessor = Application.billProcessorActor
 
       billProcessor ! userAccount.accountNumber
+
+      log.info(s"The account number : ${userAccount.accountNumber} for user ${userAccount.userName} is being saved")
 
       this.accNumToUserName(userAccount.userName) = userAccount.accountNumber //Link userName to accNumber
 

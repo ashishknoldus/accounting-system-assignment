@@ -16,7 +16,7 @@ class ReportSaverActor extends Actor with ActorLogging{
   override def receive: Receive = {
     case reports: List[Report] =>
 
-      val pw = new PrintWriter(new File("hello.txt" ))
+      val pw = new PrintWriter(new File("/home/knoldus/hello.txt" ))
 
       reports.foreach(report => {
 
@@ -29,6 +29,7 @@ class ReportSaverActor extends Actor with ActorLogging{
 
       })
 
+      log.info("The reports are saved")
 
       pw.close()
   }

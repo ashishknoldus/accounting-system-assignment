@@ -46,7 +46,7 @@ object Application extends App{
   val billProcessorActor: ActorRef = system.actorOf(Props(classOf[BillProcessorActor], billGeneratorActor)
     .withDispatcher("my-dispatcher"), "bill-processor")
 
-  val scheduleReport: Cancellable = system.scheduler.schedule(Duration.Zero,
+  val scheduleReport: Cancellable = system.scheduler.schedule(Duration.create(5, TimeUnit.SECONDS),
     Duration.create(5, TimeUnit.MINUTES), reportGeneratorActor, "generate report")
 
 
@@ -59,9 +59,9 @@ object Application extends App{
   val user5 = User("Neha Bhardwaj", "Vaishali", "neha1269", 500)
 
   accountServiceActor ! user1
-/*  accountServiceActor ! user2
+  accountServiceActor ! user2
   accountServiceActor ! user3
   accountServiceActor ! user4
-  accountServiceActor ! user5*/
+  accountServiceActor ! user5
 
 }

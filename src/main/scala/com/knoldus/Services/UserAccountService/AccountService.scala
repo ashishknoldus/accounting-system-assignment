@@ -13,9 +13,11 @@ class AccountService(accountGeneratorActor: ActorRef) extends Actor with ActorLo
   override def receive: Receive = {
     case user: User =>
       if(user.amount < 500) {
+        log.info("Give amount more than 500")
         sender ! "The amount is too low. Initial amount should be more than 500"
       } else {
         val accountNumber = (new Random).nextInt((9999999 - 1000001) + 1) + 1000001 //Random account number
+        log.info(s"New user is being created with account number $accountNumber")
         accountGeneratorActor.forward(UserAccount(accountNumber, user.name, user.address, user.userName, user.amount))
       }
     case _ => sender ! new IllegalArgumentException("Not a valid user information")

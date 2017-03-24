@@ -12,7 +12,7 @@ class BillGeneratorActor(dBInMemory: ActorRef) extends Actor with ActorLogging{
   override def receive = {
 
     case biller: Biller =>
-
+      log.info("A biller is received in BillGeneratorActor")
       dBInMemory.forward(biller)
 
     case _ =>

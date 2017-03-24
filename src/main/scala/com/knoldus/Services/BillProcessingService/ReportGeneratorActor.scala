@@ -19,9 +19,9 @@ class ReportGeneratorActor(dBInMemory: ActorRef, reportSaverActor: ActorRef) ext
   override def receive: Receive = {
     case "generate report" =>
 
-
-      val reports = dBInMemory ? "generate report"
-      pipe(reports) to reportSaverActor
+      log.info("Asking for report in ReportGeneratorActor")
+      val report = dBInMemory ? "generate report"
+      pipe(report) to reportSaverActor
 
     case _ => sender ! new IllegalArgumentException("Expected (\"get report\", userName: String)")
   }
